@@ -1,7 +1,7 @@
 import todosAppData from "./TodoAppData";
 
-// localStorage.clear()
-
+// localStorage.clear();
+// const initialState=todosAppData;
 
 const initialData = localStorage.getItem('todosAppData');
 
@@ -12,5 +12,4 @@ const initialState = localStorage.getItem('todosAppData');
 console.log(`initialState : ${initialState}`);
 
 
-// const initialState=todosAppData;
 export default JSON.parse(initialState);

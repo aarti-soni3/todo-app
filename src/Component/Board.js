@@ -10,7 +10,7 @@ export default function Board(props) {
 
     return (
         <>
-            <div className="card rounded border" style={{ width: '22rem', marginLeft: '20px' }} data-bs-theme="dark">
+            <div className="card rounded border" style={{ width: '22rem', marginLeft: '20px', marginBottom:'20px' }} data-bs-theme="dark">
                 <div className="card-body" style={{ scrollbarWidth: 'thin', height: '500px', overflowY: 'auto', overflowX: 'hidden' }}>
                     <h5 className="card-title" style={{ marginBottom: '25px' }}>{boardTitle}</h5>
                     <ul className="list-group" style={{ alignItems: 'start' }}>

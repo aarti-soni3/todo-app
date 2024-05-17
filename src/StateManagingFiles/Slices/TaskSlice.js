@@ -74,11 +74,11 @@ export const taskSlice = createSlice({
 
             for (let boardId in state.boards) {
                 const board = state.boards[boardId];
-                for(let taskItemId in board.taskItems){
+                for (let taskItemId in board.taskItems) {
                     const task = board.taskItems[taskItemId];
-                    if(task.taskId === taskId){
-                        task.taskTitle=newTask.taskTitle;
-                        task.taskDescription=newTask.taskDescription;
+                    if (task.taskId === taskId) {
+                        task.taskTitle = newTask.taskTitle;
+                        task.taskDescription = newTask.taskDescription;
                         break;
                     }
                 }
@@ -87,7 +87,24 @@ export const taskSlice = createSlice({
         },
 
         removeTodo: (state, action) => {
+            const taskId = action.payload;
+            const newState = { ...state };
 
+            for (let boardId of Object.keys(newState.boards)) {
+                const board = newState.boards[boardId];
+                if (board.taskItems[`task${taskId}`]) {
+                    const {[`task${taskId}`]: _, ...remainingTask} = board.taskItems;
+
+                    newState.boards[boardId]={
+                        ...board,
+                        taskItems: remainingTask,
+                    };
+                    break;
+                }
+            }
+            localStorage.setItem('todosAppData', JSON.stringify(newState));
+            console.log(newState.boards);
+            console.log(state.boards);
         },
 
     }
