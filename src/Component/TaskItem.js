@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { removeTodo, toggleTodo, updateTodo } from '../StateManagingFiles/Slices/TaskSlice';
+import { removeTodo, toggleTodo } from '../StateManagingFiles/Slices/TaskSlice';
 import UpdateTaskItem from './UpdateTaskItem';
-import DropDownItem from './DropDownItem';
+import DropDownList from './DropDownList';
 
 export default function TaskItem(props) {
 
@@ -48,15 +48,7 @@ export default function TaskItem(props) {
                             <p className="card-text" style={{ textAlign: 'match-parent', color: 'grey', marginBottom: '-10px' }} >{trimSentence(taskDescription, 22)}</p>
                         </label>
                     </div>
-                    <div className="dropdown" style={{ zIndex: '2', top: '10%', right: '10%', position: 'absolute', marginLeft: '8px' }}>
-                        <button className="btn toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fa fa-ellipsis-h"></i>
-                        </button>
-                        <ul className="dropdown-menu" >
-                            <DropDownItem icon="fa-solid fa-edit" actionName="Edit" action={() => { setShowUpdateTaskItem(true) }} />
-                            <DropDownItem icon="fa-solid fa-trash" actionName="Delete" action={() => { handleOnDeleteTaskItem() }} />
-                        </ul>
-                    </div>
+                    <DropDownList handleOnEdit={()=>{setShowUpdateTaskItem(true)}} handleOnDelete={()=>{handleOnDeleteTaskItem()}} />
                 </li >
             }
         </>

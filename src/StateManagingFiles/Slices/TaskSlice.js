@@ -12,6 +12,15 @@ const getTotalTaskCount = () => {
     return totalCount + 1;
 }
 
+const getTotalBoardCount = () => {
+    const data = localStorage.getItem('todosAppData');
+    const parsedData = JSON.parse(data);
+
+    let totalCount = 0;
+    totalCount += Object.keys(parsedData.boards).length;
+    return totalCount + 1;
+}
+
 export const taskSlice = createSlice({
     name: "task",
     initialState: initialState,
@@ -93,9 +102,9 @@ export const taskSlice = createSlice({
             for (let boardId of Object.keys(newState.boards)) {
                 const board = newState.boards[boardId];
                 if (board.taskItems[`task${taskId}`]) {
-                    const {[`task${taskId}`]: _, ...remainingTask} = board.taskItems;
+                    const { [`task${taskId}`]: _, ...remainingTask } = board.taskItems;
 
-                    newState.boards[boardId]={
+                    newState.boards[boardId] = {
                         ...board,
                         taskItems: remainingTask,
                     };
@@ -103,13 +112,48 @@ export const taskSlice = createSlice({
                 }
             }
             localStorage.setItem('todosAppData', JSON.stringify(newState));
-            console.log(newState.boards);
-            console.log(state.boards);
         },
 
-    }
+        addBoard: (state, action) => {
+            const title = action.payload;
+            const boardId = getTotalBoardCount();
+
+            const newBoard = {
+                boardId,
+                boardTitle: title,
+                taskItems: {},
+            }
+
+            state.boards[`board${boardId}`] = newBoard;
+            localStorage.setItem('todosAppData', JSON.stringify(state));
+        },
+
+        updateBoard: (state, action) => {
+            const { id, newTitle } = action.payload;
+            for (let boardId in state.boards) {
+                const board = state.boards[boardId];
+                if (board.boardId === id) {
+                    board.boardTitle = newTitle;
+                    break;
+                }
+            }
+            localStorage.setItem('todosAppData', JSON.stringify(state));
+        },
+
+        removeBoard: (state, action) => {
+            const boardId = action.payload;
+            const newState = { ...state };
+
+            if (newState.boards[`board${boardId}`]) {
+                const { [`board${boardId}`]: _, ...remainingBoard } = newState.boards;
+
+                newState.boards = remainingBoard
+            }
+            localStorage.setItem('todosAppData', JSON.stringify(newState));
+        },
+    },
 });
 
-export const { addTodo, toggleTodo, updateTodo, removeTodo } = taskSlice.actions;
+export const { addTodo, toggleTodo, updateTodo, removeTodo, addBoard, updateBoard, removeBoard } = taskSlice.actions;
 
 export default taskSlice.reducer;

@@ -8,7 +8,7 @@ export default function AddTaskItem(props) {
     const [taskDescription,setTaskDescription] = useState("");
 
     const dispatch = useDispatch();
-    const [boardId] = [props.boardId]
+    const [boardId,hideAddTaskItem] = [props.boardId,props.hideAddTaskItem]
     const addNewTask = ()=>{
         const newTask ={
             taskTitle:taskTitle,
@@ -24,7 +24,7 @@ export default function AddTaskItem(props) {
                 <input type="text" value={taskTitle} onChange={(e)=>{setTaskTitle(e.target.value)}} className="form-control" style={{ marginBottom: '8px' }} id="formGroupExampleInput2" placeholder="Task Name" />
                 <input type="text" value={taskDescription} onChange={(e)=>{setTaskDescription(e.target.value)}} className="form-control" style={{ marginBottom: '8px' }} id="formGroupExampleInput2" placeholder="Description" />
                 <button className="btn btn-primary" onClick={()=>{addNewTask()}} type="button" > Add Task</button>
-                <button className="btn btn-dark" onClick={()=>{props.hideAddTaskItem()}} type="button" style={{ backgroundColor:'grey', marginLeft: '8px' }}> <i className="fa-solid fa-close" ></i></button>
+                <button className="btn btn-dark" onClick={()=>{hideAddTaskItem()}} type="button" style={{ backgroundColor:'grey', marginLeft: '8px' }}> <i className="fa-solid fa-close" ></i></button>
             </div>
         </>
     )
