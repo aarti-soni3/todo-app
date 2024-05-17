@@ -21,8 +21,6 @@ export const taskSlice = createSlice({
             const board = state.boards[`board${boardId}`];
             const taskId = getTotalTaskCount();
 
-            { console.log(`taskId : ${taskId}`) }
-
             const newTask = {
                 taskId,
                 taskTitle: task.taskTitle,
@@ -40,10 +38,6 @@ export const taskSlice = createSlice({
             state.boards[`board${boardId}`] = updateBoard
 
             localStorage.setItem('todosAppData', JSON.stringify(state));
-            console.log(`statestringy :  ${JSON.stringify(state)}`);
-            console.log(`state.boards  ${state.boards}`);
-            let d = localStorage.getItem('todosAppData')
-            console.log(JSON.parse(d));
         },
 
         toggleTodo: (state, action) => {
@@ -75,12 +69,30 @@ export const taskSlice = createSlice({
             localStorage.setItem('todosAppData', JSON.stringify(state));
         },
 
+        updateTodo: (state, action) => {
+            const { taskId, newTask } = action.payload;
+
+            for (let boardId in state.boards) {
+                const board = state.boards[boardId];
+                for(let taskItemId in board.taskItems){
+                    const task = board.taskItems[taskItemId];
+                    if(task.taskId === taskId){
+                        task.taskTitle=newTask.taskTitle;
+                        task.taskDescription=newTask.taskDescription;
+                        break;
+                    }
+                }
+            }
+            localStorage.setItem('todosAppData', JSON.stringify(state));
+        },
+
         removeTodo: (state, action) => {
 
         },
+
     }
 });
 
-export const { addTodo, toggleTodo, removeTodo } = taskSlice.actions;
+export const { addTodo, toggleTodo, updateTodo, removeTodo } = taskSlice.actions;
 
 export default taskSlice.reducer;
