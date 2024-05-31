@@ -11,7 +11,8 @@ export default function UpdateBoard(props) {
     const dispatch = useDispatch();
     const updateNewBoard = (boardId)=>{
         const newTitle =boardTitle;
-        dispatch(updateBoard({id: boardId,newTitle :newTitle}));
+        const board=[boardId,newTitle]
+        dispatch(updateBoard(board));
         props.hideUpdateBoard();
     }
 

@@ -10,11 +10,10 @@ export default function UpdateTaskItem(props) {
 
     const dispatch = useDispatch();
     const updateNewTask = (taskId)=>{
-        const newTask ={
-            taskTitle:taskTitle,
-            taskDescription:taskDescription,
-        }
-        dispatch(updateTodo({taskId,newTask}));
+        const title = taskTitle;
+        const description = taskDescription;
+        const task = [taskId,title,description];
+        dispatch(updateTodo(task));
         props.hideUpdateTaskItem();
     }
 

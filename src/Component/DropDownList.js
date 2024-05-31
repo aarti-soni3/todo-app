@@ -4,7 +4,7 @@ import DropDownItem from './DropDownItem'
 export default function DropDownList(props) {
 
     const [handleOnEdit,handleOnDelete] = [props.handleOnEdit,props.handleOnDelete];
-
+    
     return (
         <div className="dropdown" style={{ zIndex: '2', top: '10%', right: '10%', position: 'absolute', marginLeft: '8px' }}>
             <button className="btn toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -13,10 +13,6 @@ export default function DropDownList(props) {
             <ul className="dropdown-menu" >
                 <DropDownItem icon="fa-solid fa-edit" actionName="Edit" action={handleOnEdit} />
                 <DropDownItem icon="fa-solid fa-trash" actionName="Delete" action={handleOnDelete} />
-
-                {/* <DropDownItem icon="fa-solid fa-edit" actionName="Edit" action={() => { setShowUpdateTaskItem(true) }} />
-                <DropDownItem icon="fa-solid fa-trash" actionName="Delete" action={() => { handleOnDeleteTaskItem() }} /> */}
-
             </ul>
         </div>
     )
