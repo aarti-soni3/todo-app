@@ -1,4 +1,3 @@
-import React from 'react'
 
 export default function DropDownItem(props) {
 
@@ -6,7 +5,7 @@ export default function DropDownItem(props) {
 
   return (
     <>
-      <button className="dropdown-item me-2" onClick={action}>
+      <button className="dropdown-item me-2" onClick={action} >
       <i className={icon} ></i>
       <span className="dropdown-item-name">  {actionName}</span>
     </button>

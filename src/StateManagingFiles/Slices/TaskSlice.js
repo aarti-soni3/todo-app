@@ -32,7 +32,10 @@ export const taskSlice = createSlice({
                 taskTitle: task.taskTitle,
                 taskDescription: task.taskDescription,
                 isCompleted: false,
+                priority:task.priority,
             }
+
+            console.log(newTask);
             state.boards[boardId].taskIds.push(taskId);
             state.tasks[taskId] = newTask;
 
@@ -48,12 +51,13 @@ export const taskSlice = createSlice({
         },
 
         updateTodo: (state, action) => {
-            const [taskId, title, description] = action.payload;
+            const [taskId, title, description,priority] = action.payload;
 
             state.tasks[taskId] = {
                 ...state.tasks[taskId],
                 taskTitle: title,
                 taskDescription: description,
+                priority : priority
             }
             localStorage.setItem('todosAppData', JSON.stringify(state));
         },
