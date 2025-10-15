@@ -19,7 +19,7 @@
 .env.production.local
 
 # projectDatas
-OtherFiles
+# OtherFiles
 
 npm-debug.log*
 yarn-debug.log*
